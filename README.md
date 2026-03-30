@@ -72,7 +72,7 @@ Example: `sexy_01.mp3`, `punch_05.mp3`, `goat_3.mp3`
 
 You can use any sounds you want — record your own, grab free sound effects, whatever. Just drop them in the folder with the right prefix and restart the app.
 
-**Using SlapMac's sound files:** If you own [SlapMac](https://slapmac.com/) ($7), you can copy their 130+ sound files from the app bundle for personal use:
+**Using SlapMac's sound files:** If you download [SlapMac](https://slapmac.com/), you can copy their 130+ sound files from the app bundle for personal use WITHOUT PAYING:
 
 ```bash
 mkdir -p ~/Desktop/slapmac/audio
