@@ -4,8 +4,12 @@ import AppKit
 class ScreenFlash {
     private var flashWindows: [NSWindow] = []
 
+    /// Flash intensity multiplier (0.0 to 2.0, default 1.0)
+    var intensityMultiplier: Double = 1.0
+
     func flash(intensity: Double) {
-        // Create a flash overlay on each screen
+        let scale = intensity * intensityMultiplier
+
         for screen in NSScreen.screens {
             let window = NSPanel(
                 contentRect: screen.frame,
@@ -14,7 +18,7 @@ class ScreenFlash {
                 defer: false
             )
             window.level = .screenSaver
-            window.backgroundColor = NSColor.white.withAlphaComponent(CGFloat(intensity) * 0.4)
+            window.backgroundColor = NSColor.white.withAlphaComponent(CGFloat(scale) * 0.5)
             window.isOpaque = false
             window.ignoresMouseEvents = true
             window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
@@ -22,8 +26,7 @@ class ScreenFlash {
 
             flashWindows.append(window)
 
-            // Fade out
-            let duration = 0.15 + (intensity * 0.2)
+            let duration = 0.15 + (scale * 0.25)
             NSAnimationContext.runAnimationGroup({ context in
                 context.duration = duration
                 window.animator().alphaValue = 0

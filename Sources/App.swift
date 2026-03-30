@@ -119,7 +119,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         effectsHeader.isEnabled = false
         statusMenu.addItem(effectsHeader)
 
-        // Screen flash toggle
+        // Screen Flash toggle + slider
         let flashItem = NSMenuItem(
             title: "Screen Flash (Overlay)",
             action: #selector(toggleScreenFlash), keyEquivalent: ""
@@ -127,8 +127,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         flashItem.target = self
         flashItem.state = settings.screenFlashEnabled ? .on : .off
         statusMenu.addItem(flashItem)
+        if settings.screenFlashEnabled {
+            statusMenu.addItem(createSliderItem(
+                value: settings.screenFlashIntensity,
+                label: "  Intensity:",
+                action: #selector(screenFlashIntensityChanged(_:))
+            ))
+        }
 
-        // Screen Shake toggle
+        // Screen Shake toggle + slider
         let shakeItem = NSMenuItem(
             title: "Screen Shake",
             action: #selector(toggleScreenShake), keyEquivalent: ""
@@ -136,18 +143,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         shakeItem.target = self
         shakeItem.state = settings.screenShakeEnabled ? .on : .off
         statusMenu.addItem(shakeItem)
-
-        // Screen Shake intensity slider
         if settings.screenShakeEnabled {
-            let shakeSlider = createSliderItem(
+            statusMenu.addItem(createSliderItem(
                 value: settings.shakeIntensity,
-                label: "  Shake: \(Int(settings.shakeIntensity * 100))%",
+                label: "  Intensity:",
                 action: #selector(shakeIntensityChanged(_:))
-            )
-            statusMenu.addItem(shakeSlider)
+            ))
         }
 
-        // Brightness Flash toggle
+        // Brightness Flash toggle + slider
         let brItem = NSMenuItem(
             title: "Brightness Flash",
             action: #selector(toggleBrightnessFlash), keyEquivalent: ""
@@ -155,18 +159,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         brItem.target = self
         brItem.state = settings.brightnessFlashEnabled ? .on : .off
         statusMenu.addItem(brItem)
-
-        // Brightness Flash intensity slider
         if settings.brightnessFlashEnabled {
-            let brSlider = createSliderItem(
+            statusMenu.addItem(createSliderItem(
                 value: settings.brightnessFlashIntensity,
-                label: "  Flash: \(Int(settings.brightnessFlashIntensity * 100))%",
+                label: "  Intensity:",
                 action: #selector(brightnessIntensityChanged(_:))
-            )
-            statusMenu.addItem(brSlider)
+            ))
         }
 
-        // Haptic Feedback toggle
+        // Trackpad Haptic Feedback toggle + slider
         let hapticItem = NSMenuItem(
             title: "Trackpad Haptic Feedback",
             action: #selector(toggleHapticFeedback), keyEquivalent: ""
@@ -174,6 +175,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         hapticItem.target = self
         hapticItem.state = settings.hapticFeedbackEnabled ? .on : .off
         statusMenu.addItem(hapticItem)
+        if settings.hapticFeedbackEnabled {
+            statusMenu.addItem(createSliderItem(
+                value: settings.hapticIntensity,
+                label: "  Intensity:",
+                action: #selector(hapticIntensityChanged(_:))
+            ))
+        }
 
         // USB Moaner toggle
         let usbItem = NSMenuItem(
@@ -265,6 +273,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return item
     }
 
+    @objc func screenFlashIntensityChanged(_ sender: NSSlider) {
+        settings.screenFlashIntensity = sender.doubleValue
+        slapController?.screenFlash.intensityMultiplier = sender.doubleValue * 2.0
+    }
+
     @objc func shakeIntensityChanged(_ sender: NSSlider) {
         settings.shakeIntensity = sender.doubleValue
         slapController?.screenShaker.intensityMultiplier = sender.doubleValue * 2.0
@@ -273,6 +286,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func brightnessIntensityChanged(_ sender: NSSlider) {
         settings.brightnessFlashIntensity = sender.doubleValue
         slapController?.brightnessFlash.intensityMultiplier = sender.doubleValue * 2.0
+    }
+
+    @objc func hapticIntensityChanged(_ sender: NSSlider) {
+        settings.hapticIntensity = sender.doubleValue
+        slapController?.hapticFeedback.intensityMultiplier = sender.doubleValue * 2.0
     }
 
     @objc func volumeChanged(_ sender: NSSlider) {

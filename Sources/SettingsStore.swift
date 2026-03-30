@@ -171,6 +171,12 @@ class SettingsStore: ObservableObject {
     @Published var brightnessFlashIntensity: Double {
         didSet { defaults.set(brightnessFlashIntensity, forKey: "brightnessFlashIntensity") }
     }
+    @Published var screenFlashIntensity: Double {
+        didSet { defaults.set(screenFlashIntensity, forKey: "screenFlashIntensity") }
+    }
+    @Published var hapticIntensity: Double {
+        didSet { defaults.set(hapticIntensity, forKey: "hapticIntensity") }
+    }
     @Published var volume: Float {
         didSet { defaults.set(volume, forKey: "volume") }
     }
@@ -191,6 +197,8 @@ class SettingsStore: ObservableObject {
         self.hapticFeedbackEnabled = d.object(forKey: "hapticFeedbackEnabled") as? Bool ?? true
         self.shakeIntensity = d.object(forKey: "shakeIntensity") as? Double ?? 0.7
         self.brightnessFlashIntensity = d.object(forKey: "brightnessFlashIntensity") as? Double ?? 0.5
+        self.screenFlashIntensity = d.object(forKey: "screenFlashIntensity") as? Double ?? 0.5
+        self.hapticIntensity = d.object(forKey: "hapticIntensity") as? Double ?? 0.7
         self.volume = d.object(forKey: "volume") as? Float ?? 0.8
     }
 }

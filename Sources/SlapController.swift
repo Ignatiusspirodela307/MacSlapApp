@@ -14,10 +14,10 @@ class SlapController: ObservableObject {
     let usbMonitor = USBMonitor()
     private let accelerometer = AccelerometerReader()
     private var slapDetector: SlapDetector
-    private let screenFlash = ScreenFlash()
+    let screenFlash = ScreenFlash()
     let screenShaker = ScreenShaker()
     let brightnessFlash = BrightnessFlash()
-    private let hapticFeedback = HapticFeedback()
+    let hapticFeedback = HapticFeedback()
     private let settings: SettingsStore
 
     private var lastSlapTime: Date = .distantPast
@@ -31,6 +31,8 @@ class SlapController: ObservableObject {
         // Apply saved intensity multipliers
         screenShaker.intensityMultiplier = settings.shakeIntensity * 2.0
         brightnessFlash.intensityMultiplier = settings.brightnessFlashIntensity * 2.0
+        screenFlash.intensityMultiplier = settings.screenFlashIntensity * 2.0
+        hapticFeedback.intensityMultiplier = settings.hapticIntensity * 2.0
 
         // Wire up slap detection
         slapDetector.onSlap = { [weak self] event in
